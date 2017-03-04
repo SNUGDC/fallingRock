@@ -5,15 +5,5 @@ using UnityEngine;
 public class Light : MonoBehaviour {
 
 	[SerializeField]
-	private int positionIndex;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public int positionIndex;
 }
