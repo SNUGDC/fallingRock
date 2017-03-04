@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface RockSpawnerOutput
+{
+    void OnSpawn(Rock rock);
+}
+
 public class RockSpawner
 {
+    public RockSpawnerOutput output;
     private readonly Rock rock1Prefab;
     private readonly Rock rock2Prefab;
     private readonly List<SpawnPoint> sSpawnPoints;
@@ -21,7 +27,8 @@ public class RockSpawner
         {
 			foreach (var sSpawnPoint in sSpawnPoints)
 			{
-				Spawn(sSpawnPoint);
+				var rock = Spawn(sSpawnPoint);
+                output.OnSpawn(rock);
 			}
 			var spawnCool = Configurations.Instance.rockDownCool;
             yield return new WaitForSeconds(spawnCool);
@@ -38,6 +45,7 @@ public class RockSpawner
 
 		Rock newRock = GameObject.Instantiate(randomPrefab);
 		newRock.transform.SetParent(sSpawnPoint.transform, false);
+        newRock.sSpawnPoint = sSpawnPoint;
 
 		return newRock;
 	}

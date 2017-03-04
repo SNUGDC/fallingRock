@@ -17,6 +17,8 @@ public class GameConfigurator {
 		game.cContainer = cContainer;
 		game.roRockSpawner = roRockSpawner;
 
+		roRockSpawner.output = gameLogic;
+
 		cContainer.player1.input = new Player1InputHandler();
 		cContainer.player2.input = new Player2InputHandler();
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour {
 
 	[SerializeField]
-	private int positionIndex;
+	public int positionIndex;
 
 	// Use this for initialization
 	void Start () {
