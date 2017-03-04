@@ -57,8 +57,14 @@ public class GameLogic : RockSpawnerOutput
 		}
 
 		var nextIndex = player.currentLight.positionIndex - 1;
-		if (otherPlayer.currentLight.positionIndex == nextIndex) {
-			return;
+		var otherPlayerIndex = otherPlayer.currentLight.positionIndex;
+
+		if (otherPlayerIndex == nextIndex) {
+			if (lights.IsFirst(otherPlayer.currentLight)) {
+				return;
+			} else {
+				nextIndex -= 1;
+			}
 		}
 
 		player.currentLight = lights.Get(nextIndex);
@@ -70,8 +76,13 @@ public class GameLogic : RockSpawnerOutput
 		}
 
 		var nextIndex = player.currentLight.positionIndex + 1;
-		if (otherPlayer.currentLight.positionIndex == nextIndex) {
-			return;
+        int otherPlayerIndex = otherPlayer.currentLight.positionIndex;
+        if (otherPlayerIndex == nextIndex) {
+			if (lights.IsLast(otherPlayer.currentLight)) {
+				return;
+			} else {
+				nextIndex += 1;
+			}
 		}
 
 		player.currentLight = lights.Get(nextIndex);
@@ -80,6 +91,11 @@ public class GameLogic : RockSpawnerOutput
 	private static void Shoot(Player pPlayer, Rocks rRocks) {
 		var pos = pPlayer.currentLight.positionIndex;
 		Rock rock = rRocks.FindNearest(pos);
+
+		if (pPlayer.color != rock.color) {
+			return;
+		}
+
 		if (rock != null) {
 			rock.Boom();
 		}

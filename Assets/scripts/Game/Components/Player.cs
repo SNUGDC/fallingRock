@@ -10,6 +10,8 @@ public interface PlayerOutput
 }
 
 public class Player : MonoBehaviour {
+	[SerializeField]
+	public PlayerColor color;
 
 	[SerializeField]
 	public int playerIndex;

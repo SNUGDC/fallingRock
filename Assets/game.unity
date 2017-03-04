@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdfeea2253bc4d0091d3dded3e6a275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: 1
   playerIndex: 1
   _currentLight: {fileID: 0}
 --- !u!1 &1277162416
@@ -900,6 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fdfeea2253bc4d0091d3dded3e6a275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: 0
   playerIndex: 0
   _currentLight: {fileID: 0}
 --- !u!1 &1353571423

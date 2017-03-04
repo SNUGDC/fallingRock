@@ -8,6 +8,8 @@ public interface RockOutput {
 }
 
 public class Rock : MonoBehaviour {
+	[SerializeField]
+	public PlayerColor color;
 	public SpawnPoint sSpawnPoint;
 	public RockOutput output;
 
