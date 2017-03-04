@@ -32,7 +32,7 @@ public class GameLogic : RockSpawnerOutput
     private readonly Lights lights;
     private readonly Player player1;
     private readonly Player player2;
-	private Rocks rocks;
+	public readonly Rocks rocks;
 
     public GameLogic(Lights lights, Player player1, Player player2)
     {
@@ -92,13 +92,15 @@ public class GameLogic : RockSpawnerOutput
 		var pos = pPlayer.currentLight.positionIndex;
 		Rock rock = rRocks.FindNearest(pos);
 
+		if (rock == null) {
+			return;
+		}
+
 		if (pPlayer.color != rock.color) {
 			return;
 		}
 
-		if (rock != null) {
-			rock.Boom();
-		}
+		rock.Boom();
 		Debug.Log("Shoot");
 	}
 
