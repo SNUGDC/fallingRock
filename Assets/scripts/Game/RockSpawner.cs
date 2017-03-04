@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +8,13 @@ public interface RockSpawnerOutput
     void OnSpawn(Rock rock);
 }
 
-public class RockSpawner
+public class RockSpawner : GameOverOutput
 {
     public RockSpawnerOutput output;
     private readonly Rock rock1Prefab;
     private readonly Rock rock2Prefab;
     private readonly List<SpawnPoint> sSpawnPoints;
+    private bool stop = false;
 
     public RockSpawner(Rock rock1Prefab, Rock rock2Prefab, List<SpawnPoint> sSpawnPoints)
     {
@@ -23,7 +25,7 @@ public class RockSpawner
 
     public IEnumerator SpawnCoroutine()
     {
-        while (true)
+        while (!stop)
         {
 			foreach (var sSpawnPoint in sSpawnPoints)
 			{
@@ -37,7 +39,7 @@ public class RockSpawner
 
 	private Rock Spawn(SpawnPoint sSpawnPoint) {
 		Rock randomPrefab;
-		if (Random.Range(0f, 1f) < 0.5f) {
+		if (UnityEngine.Random.Range(0f, 1f) < 0.5f) {
 			randomPrefab = rock1Prefab;
 		} else {
 			randomPrefab = rock2Prefab;
@@ -49,4 +51,9 @@ public class RockSpawner
 
 		return newRock;
 	}
+
+    void GameOverOutput.OnGameEnd(Player loser)
+    {
+        stop = true;
+    }
 }

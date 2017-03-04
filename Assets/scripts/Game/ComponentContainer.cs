@@ -15,6 +15,8 @@ public class ComponentContainer {
 	public Lights lights;
 	public PlayerScore player1Score;
 	public PlayerScore player2Score;
+	public EndingUI player1Ending;
+	public EndingUI player2Ending;
 
     // 유니티 시리얼라이져를 위해서 빈 컨스트럭터가 필요.
 	// 실제 코드에선 사용하면 안되므로 private으로 만듦.
@@ -40,6 +42,10 @@ public class ComponentContainer {
 		PlayerScore[] playerScores = GameObject.FindObjectsOfType(typeof(PlayerScore)) as PlayerScore[];
 		container.player1Score = playerScores.Where(s => s.color == PlayerColor.Red).First();
 		container.player2Score = playerScores.Where(s => s.color == PlayerColor.Blue).First();
+
+		EndingUI[] endingUIs = GameObject.FindObjectsOfType(typeof(EndingUI)) as EndingUI[];
+		container.player1Ending = endingUIs.Where(s => s.color == PlayerColor.Red).First();
+		container.player2Ending = endingUIs.Where(s => s.color == PlayerColor.Blue).First();
 
 		return container;
 	}

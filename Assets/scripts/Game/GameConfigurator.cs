@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 public class GameConfigurator {
 	public GameConfigurator()
@@ -12,12 +13,10 @@ public class GameConfigurator {
 
         var cContainer = ComponentContainer.Create();
 		var roRockSpawner = new RockSpawner(pPrefabContainer.rock1, pPrefabContainer.rock2, cContainer.sSpawnPoints);
-		var gameLogic = new GameLogic(cContainer.lights, cContainer.player1, cContainer.player2);
+		var gameLogic = new GameLogic(cContainer.lights, cContainer.player1, cContainer.player2, roRockSpawner);
 
 		game.cContainer = cContainer;
 		game.roRockSpawner = roRockSpawner;
-
-		gameLogic.rocks.output = cContainer.lights;
 
 		roRockSpawner.output = gameLogic;
 
@@ -32,5 +31,17 @@ public class GameConfigurator {
 
 		gameLogic.player1ScoreInput = cContainer.player1Score;
 		gameLogic.player2ScoreInput = cContainer.player2Score;
+
+		gameLogic.rocks.rockLifeCycleOutput = cContainer.lights;
+		gameLogic.rocks.gGroundCollisionOutput = gameLogic;
+
+		gameLogic.gGameOverOutput = new GameOverHandler(new List<GameOverOutput> {
+			gameLogic.rocks,
+			game.roRockSpawner,
+			cContainer.player1Ending,
+			cContainer.player2Ending,
+			cContainer.player1,
+			cContainer.player2
+		});
     }
 }

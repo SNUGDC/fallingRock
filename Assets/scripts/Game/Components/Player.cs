@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public interface PlayerOutput
 	void Shoot();
 }
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, GameOverOutput {
 	[SerializeField]
 	public PlayerColor color;
 
@@ -19,7 +20,9 @@ public class Player : MonoBehaviour {
 	public PlayerOutput output;
 	[SerializeField]
 	private Light _currentLight;
-	public Light currentLight {
+    private bool stop = false;
+
+    public Light currentLight {
 		get {
 			return _currentLight;
 		}
@@ -33,6 +36,10 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (stop) {
+			return;
+		}
+
 		if (input.Left()) {
 			output.MoveLeft();
 		} else if (input.Right()) {
@@ -41,4 +48,9 @@ public class Player : MonoBehaviour {
 			output.Shoot();
 		}
 	}
+
+    void GameOverOutput.OnGameEnd(Player loser)
+    {
+        stop = true;
+    }
 }

@@ -1,26 +1,33 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System;
 
-public interface RocksOutput
+public interface RocksLifeCycleOutput
 {
     void OnAfterAdd(Rock rRock, List<Rock> allRocks);
     void OnAfterBoom(Rock rRock, List<Rock> allRocks);
 }
 
-public class Rocks : RockOutput
+public interface RocksGroundCollisionOutput
 {
-    public RocksOutput output;
+    void OnCollideToGround(Rock collisionRock);
+}
+
+public class Rocks : RockOutput, GameOverOutput
+{
+    public RocksLifeCycleOutput rockLifeCycleOutput;
+    public RocksGroundCollisionOutput gGroundCollisionOutput;
 	private List<Rock> rocks = new List<Rock>();
 	public List<Rock> list { get { return rocks; } }
 
-    internal void Add(Rock rock)
+    public void Add(Rock rock)
     {
         rocks.Add(rock);
 		rock.output = this;
-        output.OnAfterAdd(rock, allRocks: rocks);
+        rockLifeCycleOutput.OnAfterAdd(rock, allRocks: rocks);
     }
 
-    internal Rock FindNearest(int pos)
+    public Rock FindNearest(int pos)
     {
         return rocks.Where(r => r.sSpawnPoint.positionIndex == pos).FirstOrDefault();
     }
@@ -28,6 +35,19 @@ public class Rocks : RockOutput
     void RockOutput.OnBoom(Rock target)
     {
         rocks.RemoveAll(r => r == target);
-        output.OnAfterAdd(target, rocks);
+        rockLifeCycleOutput.OnAfterAdd(target, rocks);
+    }
+
+    void RockOutput.OnCollideToGround(Rock collisionRock)
+    {
+        gGroundCollisionOutput.OnCollideToGround(collisionRock);
+    }
+
+    void GameOverOutput.OnGameEnd(Player loser)
+    {
+        foreach (var rock in rocks)
+        {
+            rock.enabled = false;
+        }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public interface RockOutput {
     void OnBoom(Rock target);
+	void OnCollideToGround(Rock collisionRock);
 }
 
 public class Rock : MonoBehaviour {
@@ -12,6 +13,17 @@ public class Rock : MonoBehaviour {
 	public PlayerColor color;
 	public SpawnPoint sSpawnPoint;
 	public RockOutput output;
+
+	/// <summary>
+	/// Update is called every frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void Update()
+	{
+		var rectTransform = GetComponent<RectTransform>();
+		if (rectTransform.anchoredPosition.y < -930) {
+			output.OnCollideToGround(this);	
+		}
+	}
 
 	/// <summary>
 	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.

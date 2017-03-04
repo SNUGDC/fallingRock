@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class Lights : RocksOutput {
+public class Lights : RocksLifeCycleOutput {
 	public List<Light> lights;
 	public List<Light> list { get { return lights; } }
 
@@ -22,12 +22,12 @@ public class Lights : RocksOutput {
 		return lights.First(l => l.positionIndex == index);
     }
 
-    void RocksOutput.OnAfterAdd(Rock rRock, List<Rock> allRocks)
+    void RocksLifeCycleOutput.OnAfterAdd(Rock rRock, List<Rock> allRocks)
     {
         RefreshLightImages(allRocks);
     }
 
-    void RocksOutput.OnAfterBoom(Rock rRock, List<Rock> allRocks)
+    void RocksLifeCycleOutput.OnAfterBoom(Rock rRock, List<Rock> allRocks)
     {
         RefreshLightImages(allRocks);
     }
