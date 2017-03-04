@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	[SerializeField]
-	private int playerIndex;
+	public int playerIndex;
 
 	// Use this for initialization
 	void Start () {

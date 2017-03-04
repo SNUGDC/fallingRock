@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Game : MonoBehaviour {
 
-	[SerializeField]
-	private ComponentContainer cContainer;
-	[SerializeField]
-	private PrefabContainer pPrefabContainer;
+	private GameConfigurator cConfigurator = new GameConfigurator();
 
-	private RockSpawner roRockSpawner;
+	[SerializeField]
+	public ComponentContainer cContainer;
+	[SerializeField]
+	public PrefabContainer pPrefabContainer;
+
+	public RockSpawner roRockSpawner;
+
 	// Use this for initialization
 	void Start () {
-		cContainer = ComponentContainer.Create();
-		roRockSpawner = new RockSpawner(pPrefabContainer.rock1, pPrefabContainer.rock2, cContainer.sSpawnPoints);
+		cConfigurator.Setup(this);
 
 		StartCoroutine(roRockSpawner.SpawnCoroutine());
 	}
