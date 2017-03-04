@@ -31,7 +31,8 @@ public class Rock : MonoBehaviour {
 	void FixedUpdate()
 	{
 		var speed = Configurations.Instance.rockDownSpeed;
-		transform.position -= new Vector3(0, Time.fixedDeltaTime * speed, 0);
+		var rectTransform = GetComponent<RectTransform>();
+		rectTransform.anchoredPosition -= new Vector2(0, Time.fixedDeltaTime * speed);
 	}
 
     internal void Boom()

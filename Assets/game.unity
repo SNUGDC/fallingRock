@@ -1807,8 +1807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebec0522c5da34e859a82014f3ec514d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockDownSpeed: 50
-  rockDownCool: 1
+  rockDownSpeed: 100
+  rockDownCool: 2
 --- !u!1 &1465275691
 GameObject:
   m_ObjectHideFlags: 0
