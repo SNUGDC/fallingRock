@@ -29,10 +29,34 @@ public class GameLogic : RockSpawnerOutput
 {
     public PlayerOutputEventHandler player1OutputEvent;
     public PlayerOutputEventHandler player2OutputEvent;
+	public readonly Rocks rocks;
+    public PlayerScoreInput player1ScoreInput;
+	public PlayerScoreInput player2ScoreInput;
+
     private readonly Lights lights;
     private readonly Player player1;
     private readonly Player player2;
-	public readonly Rocks rocks;
+	private int _player1Score;
+	private int player1Score {
+		get {
+			return _player1Score;
+		}
+		set {
+			_player1Score = value;
+			player1ScoreInput.scoreChanged(value);
+		}
+	}
+
+	private int _player2Score;
+	private int player2Score {
+		get {
+			return _player2Score;
+		}
+		set {
+			_player2Score = value;
+			player2ScoreInput.scoreChanged(value);
+		}
+	}
 
     public GameLogic(Lights lights, Player player1, Player player2)
     {
@@ -47,8 +71,8 @@ public class GameLogic : RockSpawnerOutput
 		player2OutputEvent.moveLeft = () => MoveLeft(player2, otherPlayer: player1, lights: lights);
 		player1OutputEvent.moveRight = () => MoveRight(player1, otherPlayer: player2, lights: lights);
 		player2OutputEvent.moveRight = () => MoveRight(player2, otherPlayer: player1, lights: lights);
-		player1OutputEvent.shoot = () => Shoot(player1, rocks);
-		player2OutputEvent.shoot = () => Shoot(player2, rocks);
+		player1OutputEvent.shoot = () => Shoot(player1, rocks, onShootSuccess: ScoreUpAction(player1.color));
+		player2OutputEvent.shoot = () => Shoot(player2, rocks, onShootSuccess: ScoreUpAction(player2.color));
     }
 
 	private static void MoveLeft(Player player, Player otherPlayer, Lights lights) {
@@ -88,7 +112,7 @@ public class GameLogic : RockSpawnerOutput
 		player.currentLight = lights.Get(nextIndex);
 	}
 
-	private static void Shoot(Player pPlayer, Rocks rRocks) {
+	private static void Shoot(Player pPlayer, Rocks rRocks, Action onShootSuccess) {
 		var pos = pPlayer.currentLight.positionIndex;
 		Rock rock = rRocks.FindNearest(pos);
 
@@ -101,7 +125,17 @@ public class GameLogic : RockSpawnerOutput
 		}
 
 		rock.Boom();
+		onShootSuccess();
 		Debug.Log("Shoot");
+	}
+
+	private Action ScoreUpAction(PlayerColor color)
+	{
+		if (color == PlayerColor.Red) {
+			return () => player1Score += 1;
+		} else {
+			return () => player2Score += 1;
+		}
 	}
 
     void RockSpawnerOutput.OnSpawn(Rock rock)

@@ -13,6 +13,8 @@ public class ComponentContainer {
 	[SerializeField]
     private List<Light> _lights;
 	public Lights lights;
+	public PlayerScore player1Score;
+	public PlayerScore player2Score;
 
     // 유니티 시리얼라이져를 위해서 빈 컨스트럭터가 필요.
 	// 실제 코드에선 사용하면 안되므로 private으로 만듦.
@@ -34,6 +36,10 @@ public class ComponentContainer {
 		Light[] lights = GameObject.FindObjectsOfType(typeof(Light)) as Light[];
 		container._lights = lights.ToList();
 		container.lights = new Lights(container._lights);
+
+		PlayerScore[] playerScores = GameObject.FindObjectsOfType(typeof(PlayerScore)) as PlayerScore[];
+		container.player1Score = playerScores.Where(s => s.color == PlayerColor.Red).First();
+		container.player2Score = playerScores.Where(s => s.color == PlayerColor.Blue).First();
 
 		return container;
 	}

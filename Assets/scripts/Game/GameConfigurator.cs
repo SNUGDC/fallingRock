@@ -29,5 +29,8 @@ public class GameConfigurator {
 
 		cContainer.player1.currentLight = cContainer.lights.list.Where(l => l.positionIndex == 0).First();
 		cContainer.player2.currentLight = cContainer.lights.list.Where(l => l.positionIndex == 1).First();
+
+		gameLogic.player1ScoreInput = cContainer.player1Score;
+		gameLogic.player2ScoreInput = cContainer.player2Score;
     }
 }
