@@ -6,4 +6,8 @@ public class MainMenu : MonoBehaviour {
 		Debug.Log("Start button click");
 		SceneManager.LoadScene("game");
 	}
+
+	public void OnCreditButtonClicked() {
+		SceneManager.LoadScene("credit");
+	}
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndingUI : MonoBehaviour, GameOverOutput {
 	[SerializeField]
@@ -8,15 +8,15 @@ public class EndingUI : MonoBehaviour, GameOverOutput {
 	[SerializeField]
 	private Image image;
 
-	public void Show()
+	public void OnTouchToMain()
 	{
-		image.enabled = true;
+		SceneManager.LoadScene("main");
 	}
 
     void GameOverOutput.OnGameEnd(Player loser)
     {
 		if (loser.color == color) {
-        	Show();
+        	image.enabled = true;
 		}
     }
 }
