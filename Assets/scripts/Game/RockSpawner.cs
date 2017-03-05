@@ -30,6 +30,9 @@ public class RockSpawner : GameOverOutput
             var randomPrefabs = RandomSequence();
             for (int i = 0; i < sSpawnPoints.Count; i++)
             {
+                if (randomPrefabs[i] == null) {
+                    continue;
+                }
                 var rock = Spawn(sSpawnPoints[i], randomPrefabs[i]);
                 output.OnSpawn(rock);
             }
@@ -55,16 +58,6 @@ public class RockSpawner : GameOverOutput
         values.Add(rock1Prefab);
         values.Add(rock2Prefab);
         values.Add(rock2Prefab);
-        if (UnityEngine.Random.Range(0f, 1f) < 0.5f) {
-			values.Add(rock1Prefab);
-		} else {
-			values.Add(rock2Prefab);
-		}
-        if (UnityEngine.Random.Range(0f, 1f) < 0.5f) {
-			values.Add(rock1Prefab);
-		} else {
-			values.Add(rock2Prefab);
-		}
         return Shuffle(values);
     }
 
@@ -77,6 +70,8 @@ public class RockSpawner : GameOverOutput
             values[i] = values[otherI];
             values[otherI] = tmp;
         }
+
+        values[UnityEngine.Random.Range(0, values.Count)] = null;
 
         return values;
     }
