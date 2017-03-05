@@ -1,13 +1,12 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
 	public void OnStartButtonClicked() {
 		Debug.Log("Start button click");
-		SceneManager.LoadScene("game");
+		SceneChanger.ChangeToScene("game");
 	}
 
 	public void OnCreditButtonClicked() {
-		SceneManager.LoadScene("credit");
+		SceneChanger.ChangeToScene("credit");
 	}
 }

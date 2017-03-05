@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class EndingUI : MonoBehaviour, GameOverOutput {
 	[SerializeField]
@@ -11,7 +10,7 @@ public class EndingUI : MonoBehaviour, GameOverOutput {
 
 	public void OnTouchToMain()
 	{
-		SceneManager.LoadScene("main");
+		SceneChanger.ChangeToScene("main");
 	}
 
 	/// <summary>
@@ -27,7 +26,7 @@ public class EndingUI : MonoBehaviour, GameOverOutput {
 			Input.GetKeyUp(KeyCode.Space) ||
 			Input.GetKeyUp(KeyCode.Return) ||
 			Input.GetKeyUp(KeyCode.Backspace)) {
-			SceneManager.LoadScene("main");
+			SceneChanger.ChangeToScene("main");
 		}
 	}
 

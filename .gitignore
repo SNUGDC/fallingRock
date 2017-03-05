@@ -43,3 +43,4 @@ Thumbs.db
 # ignore per project vimrc
 .vimrc
 .vscode/
+builds/
