@@ -98,19 +98,19 @@ public class GameLogic : RockSpawnerOutput, RocksGroundCollisionOutput
         }
 
         var nextIndex = player.currentLight.positionIndex - 1;
-        var otherPlayerIndex = otherPlayer.currentLight.positionIndex;
+        // var otherPlayerIndex = otherPlayer.currentLight.positionIndex;
 
-        if (otherPlayerIndex == nextIndex)
-        {
-            if (lights.IsFirst(otherPlayer.currentLight))
-            {
-                return;
-            }
-            else
-            {
-                nextIndex -= 1;
-            }
-        }
+        // if (otherPlayerIndex == nextIndex)
+        // {
+        //     if (lights.IsFirst(otherPlayer.currentLight))
+        //     {
+        //         return;
+        //     }
+        //     else
+        //     {
+        //         nextIndex -= 1;
+        //     }
+        // }
 
         player.currentLight = lights.Get(nextIndex);
     }
@@ -123,18 +123,18 @@ public class GameLogic : RockSpawnerOutput, RocksGroundCollisionOutput
         }
 
         var nextIndex = player.currentLight.positionIndex + 1;
-        int otherPlayerIndex = otherPlayer.currentLight.positionIndex;
-        if (otherPlayerIndex == nextIndex)
-        {
-            if (lights.IsLast(otherPlayer.currentLight))
-            {
-                return;
-            }
-            else
-            {
-                nextIndex += 1;
-            }
-        }
+        // int otherPlayerIndex = otherPlayer.currentLight.positionIndex;
+        // if (otherPlayerIndex == nextIndex)
+        // {
+        //     if (lights.IsLast(otherPlayer.currentLight))
+        //     {
+        //         return;
+        //     }
+        //     else
+        //     {
+        //         nextIndex += 1;
+        //     }
+        // }
 
         player.currentLight = lights.Get(nextIndex);
     }

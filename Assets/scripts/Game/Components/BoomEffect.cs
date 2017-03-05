@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BoomEffect : MonoBehaviour {
 	public Sprite boomEffect1Sprite;
 	public Sprite boomEffect2Sprite;
+	public List<AudioClip> soundEffects;
 
 	/// <summary>
 	/// Start is called on the frame when a script is enabled just before
@@ -14,6 +15,9 @@ public class BoomEffect : MonoBehaviour {
 	void Start()
 	{
 		StartCoroutine(ShowBoomEffect());
+		var clip = soundEffects[Random.Range(0, soundEffects.Count)];
+		GetComponent<AudioSource>().clip = clip;
+		GetComponent<AudioSource>().Play();
 	}
 
 	IEnumerator ShowBoomEffect() {

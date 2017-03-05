@@ -34,6 +34,9 @@ public class RockSpawner : GameOverOutput
                 output.OnSpawn(rock);
             }
 			var spawnCool = Configurations.Instance.rockDownCool;
+
+            Configurations.Instance.IncreaseDifficulty();
+
             yield return new WaitForSeconds(spawnCool);
         }
     }
