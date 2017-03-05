@@ -2,6 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+public interface PlayerInput
+{
+	void ShowUU();
+}
 
 public interface PlayerOutput
 {
@@ -10,7 +16,7 @@ public interface PlayerOutput
 	void Shoot();
 }
 
-public class Player : MonoBehaviour, GameOverOutput {
+public class Player : MonoBehaviour, GameOverOutput, PlayerInput {
 	[SerializeField]
 	public PlayerColor color;
 
@@ -21,6 +27,11 @@ public class Player : MonoBehaviour, GameOverOutput {
 	[SerializeField]
 	private Light _currentLight;
     private bool stop = false;
+
+	[SerializeField]
+	private Sprite defaultSprite;
+	[SerializeField]
+	private Sprite uuSprite;
 
     public Light currentLight {
 		get {
@@ -53,4 +64,16 @@ public class Player : MonoBehaviour, GameOverOutput {
     {
         stop = true;
     }
+
+    void PlayerInput.ShowUU()
+    {
+        StartCoroutine(ShowUUCoroutine());
+    }
+
+	IEnumerator ShowUUCoroutine()
+	{
+		GetComponent<Image>().sprite = uuSprite;
+		yield return new WaitForSeconds(0.3f);
+		GetComponent<Image>().sprite = defaultSprite;
+	}
 }

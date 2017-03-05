@@ -36,6 +36,8 @@ public class GameLogic : RockSpawnerOutput, RocksGroundCollisionOutput
     public PlayerOutputEventHandler player2OutputEvent;
     public PlayerScoreInput player1ScoreInput;
     public PlayerScoreInput player2ScoreInput;
+    public PlayerInput player1Input;
+    public PlayerInput player2Input;
 
     public readonly Rocks rocks;
     private readonly Lights lights;
@@ -86,8 +88,8 @@ public class GameLogic : RockSpawnerOutput, RocksGroundCollisionOutput
         player2OutputEvent.moveLeft = () => MoveLeft(player2, otherPlayer: player1, lights: lights);
         player1OutputEvent.moveRight = () => MoveRight(player1, otherPlayer: player2, lights: lights);
         player2OutputEvent.moveRight = () => MoveRight(player2, otherPlayer: player1, lights: lights);
-        player1OutputEvent.shoot = () => Shoot(player1, rocks, onShootSuccess: ScoreUpAction(player1.color));
-        player2OutputEvent.shoot = () => Shoot(player2, rocks, onShootSuccess: ScoreUpAction(player2.color));
+        player1OutputEvent.shoot = () => Shoot(player1, rocks, onShootSuccess: ScoreUpAction(player1.color), playerInput: player1Input);
+        player2OutputEvent.shoot = () => Shoot(player2, rocks, onShootSuccess: ScoreUpAction(player2.color), playerInput: player2Input);
     }
 
     private static void MoveLeft(Player player, Player otherPlayer, Lights lights)
@@ -139,7 +141,7 @@ public class GameLogic : RockSpawnerOutput, RocksGroundCollisionOutput
         player.currentLight = lights.Get(nextIndex);
     }
 
-    private static void Shoot(Player pPlayer, Rocks rRocks, Action onShootSuccess)
+    private static void Shoot(Player pPlayer, Rocks rRocks, Action onShootSuccess, PlayerInput playerInput)
     {
         var pos = pPlayer.currentLight.positionIndex;
         Rock rock = rRocks.FindNearest(pos);
@@ -151,6 +153,7 @@ public class GameLogic : RockSpawnerOutput, RocksGroundCollisionOutput
 
         if (pPlayer.color != rock.color)
         {
+            playerInput.ShowUU();
             return;
         }
 

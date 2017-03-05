@@ -1099,6 +1099,8 @@ MonoBehaviour:
   color: 1
   playerIndex: 1
   _currentLight: {fileID: 0}
+  defaultSprite: {fileID: 21300000, guid: b05616b57eaaf45859d5d698ab506115, type: 3}
+  uuSprite: {fileID: 21300000, guid: 2c20ccedd484246888f0c4230f7c3fa6, type: 3}
 --- !u!1 &1277162416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,6 +1445,8 @@ MonoBehaviour:
   color: 0
   playerIndex: 0
   _currentLight: {fileID: 0}
+  defaultSprite: {fileID: 21300000, guid: 15ea2ff5df6164b649a5d71096c5c8b2, type: 3}
+  uuSprite: {fileID: 21300000, guid: f5687d52f755e48e7a4a8acbfe7f30c8, type: 3}
 --- !u!1 &1353571423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,7 +1548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1389929498
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2180,7 +2184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1767900087
 RectTransform:
   m_ObjectHideFlags: 0

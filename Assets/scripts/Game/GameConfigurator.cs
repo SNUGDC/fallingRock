@@ -32,6 +32,9 @@ public class GameConfigurator {
 		gameLogic.player1ScoreInput = cContainer.player1Score;
 		gameLogic.player2ScoreInput = cContainer.player2Score;
 
+		gameLogic.player1Input = cContainer.player1;
+		gameLogic.player2Input = cContainer.player2;
+
 		gameLogic.rocks.rockLifeCycleOutput = cContainer.lights;
 		gameLogic.rocks.gGroundCollisionOutput = gameLogic;
 

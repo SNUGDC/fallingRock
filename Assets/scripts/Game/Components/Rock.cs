@@ -15,6 +15,35 @@ public class Rock : MonoBehaviour {
 	[SerializeField]
 	public BoomEffect boomEffect;
 
+	private int _hp = 1;
+	private int hp {
+		get {
+			return _hp;
+		}
+		set {
+			_hp = value;
+			var rectTransform = GetComponent<RectTransform>();
+			var size = 140;
+			if (value == 3) {
+				size = 250;
+			} else if (value == 2) {
+				size = 200;
+			} else {
+				size = 140;
+			}
+			var prevRect = rectTransform.rect;
+			rectTransform.sizeDelta = new Vector2(size, size);
+		}
+	}
+
+	void Start() {
+		if (Random.Range(0f, 1.0f) < 0.1666f) {
+			hp = 3;
+		} else {
+			hp = 1;
+		}
+	}
+
 	/// <summary>
 	/// Update is called every frame, if the MonoBehaviour is enabled.
 	/// </summary>
@@ -38,8 +67,12 @@ public class Rock : MonoBehaviour {
 
     internal void Boom()
     {
-		output.OnBoom(this);
+		if (hp > 1) {
+			hp -= 1;
+			return;
+		}
 
+		output.OnBoom(this);
 		boomEffect = Instantiate(boomEffect) as BoomEffect;
 		boomEffect.transform.SetParent(sSpawnPoint.transform, false);
 		boomEffect.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
