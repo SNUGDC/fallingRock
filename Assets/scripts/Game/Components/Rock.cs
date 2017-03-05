@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface RockOutput {
     void OnBoom(Rock target);
@@ -13,6 +12,8 @@ public class Rock : MonoBehaviour {
 	public PlayerColor color;
 	public SpawnPoint sSpawnPoint;
 	public RockOutput output;
+	[SerializeField]
+	public BoomEffect boomEffect;
 
 	/// <summary>
 	/// Update is called every frame, if the MonoBehaviour is enabled.
@@ -38,6 +39,11 @@ public class Rock : MonoBehaviour {
     internal void Boom()
     {
 		output.OnBoom(this);
-        Destroy(gameObject);
+
+		boomEffect = Instantiate(boomEffect) as BoomEffect;
+		boomEffect.transform.SetParent(sSpawnPoint.transform, false);
+		boomEffect.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+
+		Destroy(gameObject);
     }
 }

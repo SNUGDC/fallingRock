@@ -67,6 +67,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156906f95abba43d8994d570d7a52fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: 0
+  sSpawnPoint: {fileID: 0}
+  boomEffect: {fileID: 114827317650410420, guid: 96790aeb6d72c4aee837314af706a368,
+    type: 2}
 --- !u!222 &222576128888985350
 CanvasRenderer:
   m_ObjectHideFlags: 1
